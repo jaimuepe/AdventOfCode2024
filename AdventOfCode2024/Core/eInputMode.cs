@@ -2,6 +2,7 @@
 
 public enum eInputMode
 {
+    Test,
     StdIn,
     RealInput,
 }

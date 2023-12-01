@@ -1,10 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode2024.Core;
 
 public abstract class DayXX
 {
     private static readonly Regex DayIndexRegex = new(@"Day(\d\d)");
+
+    private bool _measureTime;
+    private long _beforeTimestamp;
+
+    private eInputMode _mode;
+    private int _part;
+
+    protected abstract string Test { get; }
 
     private string DayIndexStr
     {
@@ -15,24 +24,30 @@ public abstract class DayXX
         }
     }
 
-    public void Part1(eInputMode mode = eInputMode.RealInput)
+    public void Part1(eInputMode mode, bool measureTime = false)
     {
-        Console.WriteLine();
-        Console.WriteLine($"------ DAY {DayIndexStr} PART 1 ------");
-        Console.WriteLine("---------------------------");
+        _measureTime = measureTime;
+        _mode = mode;
+        _part = 1;
 
-        var lines = ParseInput(mode, ePart.Part1);
+        var lines = ParseInput(mode);
+
+        PreSolve();
         SolvePart1(lines);
+        PostSolve();
     }
 
-    public void Part2(eInputMode mode = eInputMode.RealInput)
+    public void Part2(eInputMode mode, bool measureTime = false)
     {
-        Console.WriteLine();
-        Console.WriteLine($"------ DAY {DayIndexStr} PART 2 ------");
-        Console.WriteLine("---------------------------");
+        _measureTime = measureTime;
+        _mode = mode;
+        _part = 2;
+        
+        var lines = ParseInput(mode);
 
-        var lines = ParseInput(mode, ePart.Part2);
+        PreSolve();
         SolvePart2(lines);
+        PostSolve();
     }
 
     protected void PrintResult(object result)
@@ -44,15 +59,36 @@ public abstract class DayXX
 
     protected abstract void SolvePart2(List<string> lines);
 
-    private List<string> ParseInput(eInputMode mode, ePart part)
+    private void PreSolve()
+    {
+        Console.WriteLine();
+        Console.WriteLine($"------ DAY {DayIndexStr} PART {_part} {_mode} ------");
+        Console.WriteLine("---------------------------");
+        
+        if (_measureTime) _beforeTimestamp = Stopwatch.GetTimestamp();
+    }
+
+    private void PostSolve()
+    {
+        if (_measureTime)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Elapsed: {Stopwatch.GetElapsedTime(_beforeTimestamp).TotalMilliseconds}ms");
+        }
+    }
+
+    private List<string> ParseInput(eInputMode mode)
     {
         return mode switch
         {
+            eInputMode.Test => ReadInputFromTest(),
             eInputMode.StdIn => ReadInputFromStdIn(),
             eInputMode.RealInput => ReadInputFromFile(),
             _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
         };
     }
+
+    private List<string> ReadInputFromTest() => Test.Split('\n').ToList();
 
     private List<string> ReadInputFromStdIn()
     {

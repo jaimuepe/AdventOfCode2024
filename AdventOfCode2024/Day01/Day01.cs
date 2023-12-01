@@ -4,6 +4,9 @@ namespace AdventOfCode2024.Day01
 {
     internal class Day01 : DayXX
     {
+        protected override string Test =>
+            "two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen";
+
         protected override void SolvePart1(List<string> lines)
         {
             SolveCommon(lines, false);
