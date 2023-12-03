@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2024.Day01
 {
-    internal class Day01 : DayXX
+    internal class Day01 : DayX
     {
         protected override string Test =>
             "two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen";

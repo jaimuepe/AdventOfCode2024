@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2024.Core;
 
-public abstract class DayXX
+public abstract class DayX
 {
     private static readonly Regex DayIndexRegex = new(@"Day(\d\d)");
 
