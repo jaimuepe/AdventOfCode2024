@@ -6,8 +6,6 @@ public class Day04 : DayX
 {
     private class ScratchCard
     {
-        public int Id { get; init; }
-
         public List<int> WinningNumbers { get; init; }
 
         public List<int> MyNumbers { get; init; }
@@ -62,7 +60,6 @@ public class Day04 : DayX
         foreach (var line in lines)
         {
             var colonIndex = line.IndexOf(":", StringComparison.Ordinal);
-            var id = int.Parse(line.Substring(5, colonIndex - 5));
 
             var strAfterColon = line[(colonIndex + 2)..];
 
@@ -73,7 +70,6 @@ public class Day04 : DayX
 
             yield return new ScratchCard
             {
-                Id = id,
                 WinningNumbers = winningNumbers,
                 MyNumbers = myNumbers,
             };
