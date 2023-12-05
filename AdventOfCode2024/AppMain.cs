@@ -7,10 +7,10 @@ using AdventOfCode2024.Day05;
 
 var days = new DayX[]
 {
-    new Day01(),
-    new Day02(),
-    new Day03(),
-    new Day04(),
+    // new Day01(),
+    // new Day02(),
+    // new Day03(),
+    // new Day04(),
     new Day05(),
 };
 

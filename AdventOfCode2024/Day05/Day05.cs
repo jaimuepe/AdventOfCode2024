@@ -91,7 +91,7 @@ public class Day05 : DayX
         var almanac = ParseAlmanac(lines, isPartB: false);
 
         var result = long.MaxValue;
-        
+
         foreach (var seed in almanac.Seeds)
         {
             result = long.Min(result,
@@ -157,8 +157,6 @@ public class Day05 : DayX
         Almanac almanac,
         string rangeId)
     {
-        var offsetRanges = new List<OffsetRange>();
-
         var ranges = almanac.AllRanges[rangeId];
 
         var lastSourceIndex = firstSourceIndex + sourceLength;
@@ -186,9 +184,9 @@ public class Day05 : DayX
 
                 if (range == null)
                 {
-                    // ok, all values are outside the range
+                    // all values are outside the range, map 1:1
                     range = new Range(firstSourceIndex, firstSourceIndex, sourceLength);
-                    offsetRanges.Add(new OffsetRange(range, 0, sourceLength));
+                    yield return new OffsetRange(range, 0, sourceLength);
 
                     break;
                 }
@@ -197,7 +195,8 @@ public class Day05 : DayX
                     // some values are outside the range, others not
                     var length = long.Min(lastSourceIndex - i, range.SourceIndex);
                     var fakeRange = new Range(firstSourceIndex, firstSourceIndex, length);
-                    offsetRanges.Add(new OffsetRange(fakeRange, 0, length));
+
+                    yield return new OffsetRange(fakeRange, 0, length);
 
                     i += length;
                 }
@@ -211,13 +210,11 @@ public class Day05 : DayX
                 // how many values do we take from this range?
                 var length = long.Min(lastSourceIndex - i, range.SourceIndex + range.Length - i);
 
-                offsetRanges.Add(new OffsetRange(range, sourceOffset, length));
+                yield return new OffsetRange(range, sourceOffset, length);
 
                 i += length;
             }
         }
-
-        return offsetRanges;
     }
 
     private static Almanac ParseAlmanac(IReadOnlyList<string> lines, bool isPartB)
@@ -268,12 +265,12 @@ public class Day05 : DayX
                     new Range(sourceIndex, destinationIndex, length));
             }
 
-            foreach (var list in almanac.AllRanges.Values)
-            {
-                list.Sort();
-            }
-
             i = endIndex + 1;
+        }
+
+        foreach (var list in almanac.AllRanges.Values)
+        {
+            list.Sort();
         }
 
         return almanac;
