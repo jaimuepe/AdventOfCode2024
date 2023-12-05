@@ -91,7 +91,7 @@ public class Day05 : DayX
         var almanac = ParseAlmanac(lines, isPartB: false);
 
         var result = long.MaxValue;
-
+        
         foreach (var seed in almanac.Seeds)
         {
             result = long.Min(result,
@@ -118,7 +118,7 @@ public class Day05 : DayX
 
     private static long GetMinimumDestinationValueForSeedRange(long firstIndex, long length, Almanac almanac)
     {
-        return GetMinimumDestinationValue(GetDestinationRangesForSeedRange(firstIndex, length, almanac));
+        return GetMinimumDestinationValue(GetLocationRangesForSeedRange(firstIndex, length, almanac));
     }
 
     private static long GetMinimumDestinationValue(IEnumerable<OffsetRange> ranges)
@@ -126,7 +126,7 @@ public class Day05 : DayX
         return ranges.Min(offset => offset.Range.DestinationIndex + offset.Offset);
     }
 
-    private static IEnumerable<OffsetRange> GetDestinationRangesForSeedRange(long from, long length, Almanac almanac)
+    private static IEnumerable<OffsetRange> GetLocationRangesForSeedRange(long from, long length, Almanac almanac)
     {
         IEnumerable<OffsetRange>? ranges = null;
 

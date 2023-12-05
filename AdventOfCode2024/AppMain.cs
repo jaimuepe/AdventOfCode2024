@@ -1,10 +1,27 @@
 ﻿using AdventOfCode2024.Core;
+using AdventOfCode2024.Day01;
+using AdventOfCode2024.Day02;
+using AdventOfCode2024.Day03;
+using AdventOfCode2024.Day04;
 using AdventOfCode2024.Day05;
 
-var day05 = new Day05();
+var days = new DayX[]
+{
+    new Day01(),
+    new Day02(),
+    new Day03(),
+    new Day04(),
+    new Day05(),
+};
 
-day05.Part1(eInputMode.Test);
-day05.Part1(eInputMode.RealInput, measureTime: true);
+foreach (var day in days)
+{
+    day.Part1(eInputMode.Test);
+    day.Part2(eInputMode.Test);
+}
 
-day05.Part2(eInputMode.Test);
-day05.Part2(eInputMode.RealInput, measureTime: true);
+foreach (var day in days)
+{
+    day.Part1(eInputMode.RealInput, measureTime: true);
+    day.Part2(eInputMode.RealInput, measureTime: true);
+}

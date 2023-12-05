@@ -37,7 +37,7 @@ public class Day03 : DayX
                     if (j < 0 || j >= Grid[i].Length) continue;
                     if (i == y && (fromX == toX && j == fromX || j >= fromX && j <= toX)) continue;
 
-                    yield return new Cell()
+                    yield return new Cell
                     {
                         X = j,
                         Y = i,

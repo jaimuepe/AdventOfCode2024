@@ -50,7 +50,7 @@ public abstract class DayX
         PostSolve();
     }
 
-    protected void PrintResult(object result)
+    protected static void PrintResult(object result)
     {
         Console.WriteLine($"Result: {result}");
     }
