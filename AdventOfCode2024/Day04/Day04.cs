@@ -6,9 +6,15 @@ public class Day04 : DayX
 {
     private class ScratchCard
     {
-        public List<int> WinningNumbers { get; init; }
+        public ScratchCard(List<int> winningNumbers, List<int> myNumbers)
+        {
+            WinningNumbers = winningNumbers;
+            MyNumbers = myNumbers;
+        }
 
-        public List<int> MyNumbers { get; init; }
+        public List<int> WinningNumbers { get; }
+
+        public List<int> MyNumbers { get; }
     }
 
     protected override string Test =>
@@ -68,11 +74,7 @@ public class Day04 : DayX
             var winningNumbers = tokens[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
             var myNumbers = tokens[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
 
-            yield return new ScratchCard
-            {
-                WinningNumbers = winningNumbers,
-                MyNumbers = myNumbers,
-            };
+            yield return new ScratchCard(winningNumbers, myNumbers);
         }
     }
 }
