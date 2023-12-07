@@ -5,8 +5,12 @@ namespace AdventOfCode2024.Core;
 
 public abstract class DayX
 {
-    private static readonly Regex DayIndexRegex = new(@"Day(\d\d)");
+    protected bool IsPart1 { get; private set; }
 
+    protected bool IsPart2 => !IsPart1;
+    
+    private static readonly Regex DayIndexRegex = new(@"Day(\d\d)");
+    
     private bool _measureTime;
     private long _beforeTimestamp;
 
@@ -26,6 +30,8 @@ public abstract class DayX
 
     public void Part1(eInputMode mode, bool measureTime = false)
     {
+        IsPart1 = true;
+        
         _measureTime = measureTime;
         _mode = mode;
         _part = 1;
@@ -39,6 +45,8 @@ public abstract class DayX
 
     public void Part2(eInputMode mode, bool measureTime = false)
     {
+        IsPart1 = false;
+        
         _measureTime = measureTime;
         _mode = mode;
         _part = 2;
