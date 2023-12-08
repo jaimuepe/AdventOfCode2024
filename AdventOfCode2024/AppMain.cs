@@ -6,6 +6,7 @@ using AdventOfCode2024.Day04;
 using AdventOfCode2024.Day05;
 using AdventOfCode2024.Day06;
 using AdventOfCode2024.Day07;
+using AdventOfCode2024.Day08;
 
 var days = new DayX[]
 {
@@ -15,7 +16,8 @@ var days = new DayX[]
     // new Day04(),
     // new Day05(),
     // new Day06(),
-    new Day07(),
+    // new Day07(),
+    new Day08(),
 };
 
 foreach (var day in days)

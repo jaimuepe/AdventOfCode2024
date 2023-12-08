@@ -59,7 +59,7 @@ public class Day07 : DayX
         {
             var hits = new int[ConversionTable['A'] + 1];
 
-            foreach (var t in Cards) hits[ConversionTable[t]]++;
+            foreach (var card in Cards) hits[ConversionTable[card]]++;
 
             var anyFourOfAKind = false;
             var anyThreeOfAKind = false;
